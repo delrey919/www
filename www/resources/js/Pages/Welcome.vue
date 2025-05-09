@@ -1,20 +1,27 @@
 <template>
+    <!-- Overlay para bloquear la interacción -->
+    <div
+        v-if="showCookieBanner"
+        class="fixed inset-0 bg-black bg-opacity-50 z-40"
+        style="pointer-events: all;"
+    ></div>
     <!-- Barra de navegación superior -->
     <Navbar />
     <div
         v-if="showCookieBanner"
         class="fixed bottom-0 left-0 w-full bg-gray-800 text-white p-4 flex justify-between items-center z-50"
+        style="pointer-events: all;"
     >
         <div>
-            Aquest lloc utilita cookies per millorar la tevaexperiència. Al continuar navegant, accepta el nostre us de cookies.        </div>
+            Aquest lloc utiliza cookies per millorar la teva experiència. Al continuar navegant, acceptes el nostre ús de cookies.        </div>
         <button
             @click="acceptCookies"
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         >
-            Aceptar
+            Acceptar
         </button>
     </div>
-    <div class="container mx-auto px-4">
+    <div class="container mx-auto px-4" :aria-hidden="showCookieBanner ? 'true' : 'false'">
         <!-- Logo centrado y responsive -->
         <div class="flex justify-center items-center mt-8 mb-4">
             <img
@@ -43,7 +50,7 @@
 <script setup>
 // Importa los helpers de Inertia y Vue
 import { Link, router } from '@inertiajs/vue3';
-import { ref, onMounted, onUnmounted, computed } from 'vue';
+import { ref, onMounted, onUnmounted, computed, watch } from 'vue';
 // Importa los componentes de la barra de navegación y el pie de página
 import Navbar from '@/Components/Navbar.vue';
 
@@ -74,8 +81,25 @@ function CreateCategories(){
 function acceptCookies() {
     localStorage.setItem('cookiesAccepted', 'true');
     showCookieBanner.value = false;
+    document.body.classList.remove('overflow-hidden');
 }
 const showCookieBanner = ref(!localStorage.getItem('cookiesAccepted'));
 
+// Evita el scroll cuando el banner está activo
+watch(showCookieBanner, (val) => {
+    if (val) {
+        document.body.classList.add('overflow-hidden');
+    } else {
+        document.body.classList.remove('overflow-hidden');
+    }
+});
+onMounted(() => {
+    if (showCookieBanner.value) {
+        document.body.classList.add('overflow-hidden');
+    }
+});
+onUnmounted(() => {
+    document.body.classList.remove('overflow-hidden');
+});
 
 </script>
