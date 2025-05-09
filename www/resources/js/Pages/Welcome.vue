@@ -15,6 +15,15 @@
         </button>
     </div>
     <div class="container mx-auto px-4">
+        <!-- Logo centrado y responsive -->
+        <div class="flex justify-center items-center mt-8 mb-4">
+            <img
+                src="/images/wow.png"
+                alt="Logo"
+                class="h-20 w-auto md:h-32 transition-all duration-300"
+                style="max-width: 90vw;"
+            />
+        </div>
         <!-- Título principal, clicable para volver al inicio -->
         <div class="text-center text-3xl md:text-5xl p-4" @click="Welcome">
             Benvinguts a la nostra pàgina d'anuncis

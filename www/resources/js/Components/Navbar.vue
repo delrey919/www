@@ -1,8 +1,9 @@
 <script setup>
-import { Link } from '@inertiajs/vue3';
-import { ref } from 'vue';
+import { Link, router } from '@inertiajs/vue3';
+import { ref, computed, onMounted } from 'vue';
 
 const isOpen = ref(false);
+const showUserMenu = ref(false);
 
 const toggleMenu = () => {
     isOpen.value = !isOpen.value;
@@ -31,7 +32,7 @@ function logout() {
     <nav class="bg-gray-800" role="navigation" aria-label="Navegación principal">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
-                <img src="/images/wow.png" alt="test" class="object-contain h-full">
+                <img src="/images/wow.png" alt="Logo" class="object-contain h-10 w-auto cursor-pointer" @click="$inertia.visit('/')" />
                 <div class="flex items-center">
                     <div class="flex-shrink-0">
                         <Link 
@@ -66,30 +67,26 @@ function logout() {
 
                 <!-- Usuario autenticado -->
                 <template v-if="$page.props.auth.user">
-                    <div 
-                        style="position: relative;" 
-                        @click.stop="showUserMenu = !showUserMenu"
-                        :style="{ width: isMobile ? '100%' : 'auto', textAlign: isMobile ? 'center' : 'left' }"
-                    >
-                        <button style="background: none; border: none; color: white; padding: 10px; cursor: pointer; display: flex; align-items: center; gap: 5px; margin: 0 auto;">
+                    <div style="position: relative;">
+                        <button
+                            @click="showUserMenu = !showUserMenu"
+                            style="background: none; border: none; color: white; padding: 10px; cursor: pointer; display: flex; align-items: center; gap: 5px;"
+                        >
                             {{ $page.props.auth.user.name }}
                             <span style="font-size: 12px;">▼</span>
                         </button>
-                        
                         <!-- Menú desplegable -->
-                        <div 
-                            v-if="showUserMenu" 
-                            style="position: absolute; background-color: white; border-radius: 4px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); min-width: 150px; z-index: 100;"
-                            :style="{
-                                top: '100%',
-                                right: isMobile ? '50%' : '0',
-                                transform: isMobile ? 'translateX(50%)' : 'none'
-                            }"
+                        <div
+                            v-if="showUserMenu"
+                            style="position: absolute; background-color: white; border-radius: 4px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); min-width: 150px; z-index: 100; right: 0; top: 100%;"
                         >
                             <Link :href="route('profile.edit')" style="display: block; padding: 10px 15px; color: #333; text-decoration: none; border-bottom: 1px solid #eee;">
                                 Perfil
                             </Link>
-                            <button @click="logout" style="width: 100%; text-align: left; background: none; border: none; padding: 10px 15px; color: #333; cursor: pointer;">
+                            <button
+                                @click="logout"
+                                style="width: 100%; text-align: left; background: none; border: none; padding: 10px 15px; color: #333; cursor: pointer;"
+                            >
                                 Cerrar Sesión
                             </button>
                         </div>

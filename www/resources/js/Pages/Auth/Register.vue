@@ -15,12 +15,13 @@ const form = useForm({
 });
 
 const passwordError = ref('');
+
 function validatePassword() {
-  if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/.test(form.password)) {
-    passwordError.value = 'La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un símbolo.';
-  } else {
-    passwordError.value = '';
-  }
+    if (form.password.length < 8) {
+        passwordError.value = 'La contraseña debe tener al menos 8 caracteres.';
+    } else {
+        passwordError.value = '';
+    }
 }
 
 const submit = () => {
@@ -72,17 +73,13 @@ const submit = () => {
                 <input
                     id="password"
                     type="password"
-                    class="mt-1 block w-full"
+                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                     v-model="form.password"
                     required
-                    pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[\\W_]).{8,}$"
-                    title="La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un símbolo."
+                    pattern=".{8,}"
+                    title="La contraseña debe tener al menos 8 caracteres."
                     @input="validatePassword"
                 />
-
-                <small>
-                    La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un símbolo.
-                </small>
 
                 <span v-if="passwordError" class="text-red-500">{{ passwordError }}</span>
 
