@@ -107,11 +107,4 @@ class ZapatosController extends Controller
         return redirect()->route('zapatos.index');
     }
 
-    public function updateCategory(Request $request, Zapatos $zapato)
-    {
-        $request->validate(['category_id' => 'required|exists:categories,id']);
-        $zapato->category_id = $request->category_id;
-        $zapato->save();
-        return response()->json(['success' => true]);
-    }
 }
