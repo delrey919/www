@@ -32,6 +32,7 @@ Route::middleware('auth')->group(function () {
 
 Route::resource('zapatos', ZapatosController::class)->middleware(['auth']);
 Route::resource('categories', CategoryController::class)->middleware(['auth']);
+Route::resource('anunci', AnunciController::class)->middleware(['auth']);
 
 Route::put('/zapatos/{zapato}/category', [ZapatosController::class, 'updateCategory']);
 
