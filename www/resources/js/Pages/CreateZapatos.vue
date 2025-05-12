@@ -67,6 +67,31 @@
                     </select>
                 </div>
 
+                <!-- Campo para la fecha -->
+                <div class="mb-3">
+                    <label for="date" class="block mb-1">Fecha:</label>
+                    <input 
+                        type="date" 
+                        id="date" 
+                        v-model="form.date" 
+                        class="w-full border p-2 rounded"
+                        required
+
+                    />
+                </div>
+
+                <!-- Campo para la hora -->
+                <div class="mb-3">
+                    <label for="time" class="block mb-1">Hora:</label>
+                    <input 
+                        type="time" 
+                        id="time" 
+                        v-model="form.time" 
+                        class="w-full border p-2 rounded"
+                        required
+
+                    />
+                </div>
 
                 <!-- Botones para cancelar o guardar el zapato -->
                 <div class="flex flex-col md:flex-row justify-between mt-4 space-y-2 md:space-y-0">
@@ -110,7 +135,8 @@ const form = useForm({
     description: '',
     mail: '',
     category_id: '',
-    photo: null,
+    date: '',
+    time: '',
 });
 
 // Función que se ejecuta al enviar el formulario
