@@ -82,11 +82,11 @@
 
                 <!-- Campo para la hora -->
                 <div class="mb-3">
-                    <label for="time" class="block mb-1">Hora:</label>
+                    <label for="hora" class="block mb-1">Hora:</label>
                     <input 
                         type="time" 
-                        id="time" 
-                        v-model="form.time" 
+                        id="hora" 
+                        v-model="form.hora" 
                         class="w-full border p-2 rounded"
                         required
 
@@ -133,10 +133,11 @@ const props = defineProps({
 const form = useForm({
     name: '',
     description: '',
+    date: '',
+    hora: '',
     mail: '',
     category_id: '',
-    date: '',
-    time: '',
+
 });
 
 // Función que se ejecuta al enviar el formulario
