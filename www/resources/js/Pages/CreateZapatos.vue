@@ -74,14 +74,12 @@
                         :href="route('zapatos.index')" 
                         class="w-full md:w-auto text-center bg-gray-300 px-3 py-1 rounded"
                         role="button"
-                        aria-label="Cancelar creación de zapato"
                     >
                         Cancelar
                     </Link>
                     <button 
                         type="submit" 
                         class="w-full md:w-auto bg-blue-700 text-white px-3 py-1 rounded"
-                        aria-label="Guardar zapato"
                     >
                         Guardar
                     </button>
@@ -106,9 +104,6 @@ const props = defineProps({
     categories: Array,
 });
 
-// Variable reactiva para la vista previa de la imagen seleccionada
-const previewImage = ref(null);
-
 // Formulario reactivo para el zapato
 const form = useForm({
     name: '',
@@ -117,16 +112,6 @@ const form = useForm({
     category_id: '',
     photo: null,
 });
-
-// Maneja el cambio de imagen y muestra la vista previa
-const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    form.photo = file;
-    
-    if (file) {
-        previewImage.value = URL.createObjectURL(file);
-    }
-};
 
 // Función que se ejecuta al enviar el formulario
 function submit() {

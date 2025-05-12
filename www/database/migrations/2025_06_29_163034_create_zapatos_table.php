@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('date');
             $table->string('hora');
             $table->string('mail');
-            $table->foreignId("category_id")->constrained();
+            $table->foreignId("category_id");
             $table->timestamps();
         });
     }
