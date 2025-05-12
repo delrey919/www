@@ -8,24 +8,17 @@
             
             <!-- Tabla Responsive -->
             <div class="overflow-x-auto p-4 bg-white rounded shadow mb-8">
-                <table class="w-full min-w-[800px]" aria-label="Información detallada del zapato">
+                <table class="w-full min-w-[400px]" aria-label="Información detallada del zapato">
                     <tbody>
                         <tr class="bg-gray-200 text-left">
-                            <th class="p-2 border" scope="col">ID</th>
                             <th class="p-2 border" scope="col">Nombre</th>
-                            <th class="p-2 border" scope="col">Descripción</th>
-                            <th class="p-2 border" scope="col">mail</th>
                             <th class="p-2 border" scope="col">Categoría</th>
                         </tr>
-
                         <tr class="border-t hover:bg-gray-50">
-                            <td class="p-2 border">{{ zapatos.id }}</td>
                             <td class="p-2 border">{{ zapatos.name }}</td>
-                            <td class="p-2 border">{{ zapatos.description }}</td>
-                            <td class="p-2 border">{{ zapatos.mail }}</td>
                             <td class="p-2 border">
                                 {{ zapatos.category?.name || 'Sin categoría' }}
-                            </td>                                  
+                            </td>
                         </tr>
                     </tbody>
                 </table>
